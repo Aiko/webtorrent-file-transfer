@@ -1,107 +1,110 @@
 <html>
+
 <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <meta name="description" content="Transfer files for free with this tool.">
-   <meta name="author" content="Aiko AI">
-   <title>Aiko Transfer | Free Peer To Peer File Transfer</title>
-   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-   <link rel="stylesheet" href="style.css">
-   <link rel="shortcut icon" type="image/png" href="favicon.png" />
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-   integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Transfer files for free with this tool.">
+    <meta name="author" content="Aiko AI">
+    <title>Aiko Transfer | Free Peer To Peer File Transfer</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
+
 <body>
     <div id="app">
 
 
-<!-- NEW STUFF -->
+        <!-- Initialize Download or Upload -->
         <div class="zone">
-          <div id="dropZ">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <div>Drag and drop your file here</div>                    
-            <span>OR</span>
-            <div class="selectFile">       
-              <label for="file">Select file</label>                   
-              <input type="file" name="files[]" id="file">
+            <div id="dropZ">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <div>Drag and drop your file here</div>
+                <span>OR</span>
+                <div class="selectFile">
+                    <label for="file">Select file</label>
+                    <input type="file" id="file" @change="maybeSeed" multiple>
+                </div>
+                <span>OR</span>
+                <div>Download using a magnet link. <input @keyup.enter="download" type="text" :disabled="loading"
+                        v-model="magnet" placeholder="magnet:"></div>
             </div>
-            <span>OR</span>
-            <div>Use a magnet link. <input type="" name="" placeholder="Magnet"></div>  
-          </div>
         </div>
         <a href="https://helloaiko.com"><img src="power.png"></a>
 
 
-    <!-- OLD STUFF -->
+        <!-- OLD STUFF -->
 
-  <div style="height: 400px; width: 400px; background-color: red; display: none;" id="filedrop"></div>
-  <div v-if="torrent">
-    {{torrent.name}} ({{torrent.length}} bytes): <a href="#">{{torrent.magnetURI}}</a>
-    <ul>
-        <li v-for="file in torrent.files">{{file.name}} ({{file.length}} bytes)</li>
-    </ul>
-</div>
-<input :disabled="loading" :style="'color:' + (magnetValid ? 'green' : 'red')" v-model="magnet" placeholder="magnet:" style="display: none;" />
-<button v-if="magnetValid" :disabled="loading" @click="download">Download</button>
-<p v-if="error">{{error}}</p>
-<p v-if="addedTorrents.length">Loading torrents:</p>
-<ul v-if="addedTorrents.length">
-    <li v-for="addedTorrent in addedTorrents">
-        {{addedTorrent.name}} ({{addedTorrent.length}} bytes)
-        <br>
-        {{(addedTorrent.progress * 100).toFixed(2)}}% done, ETA: {{(addedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
-        <ul>
-            <li v-for="file in addedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+        <div v-if="torrent">
+            {{torrent.name}} ({{torrent.length}} bytes): <a href="#">{{torrent.magnetURI}}</a>
+            <ul>
+                <li v-for="file in torrent.files">{{file.name}} ({{file.length}} bytes)</li>
+            </ul>
+        </div>
+        <p v-if="error">{{error}}</p>
+        <p v-if="addedTorrents.length">Loading torrents:</p>
+        <ul v-if="addedTorrents.length">
+            <li v-for="addedTorrent in addedTorrents">
+                {{addedTorrent.name}} ({{addedTorrent.length}} bytes)
+                <br>
+                {{(addedTorrent.progress * 100).toFixed(2)}}% done, ETA:
+                {{(addedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
+                <ul>
+                    <li v-for="file in addedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                </ul>
+            </li>
         </ul>
-    </li>
-</ul>
-<p v-if="finishedTorrents.length">Torrents:</p>
-<ul v-if="finishedTorrents.length">
-    <li v-for="finishedTorrent in finishedTorrents">
-        {{finishedTorrent.name}} ({{finishedTorrent.length}} bytes)
-        <br>
-        {{(finishedTorrent.progress * 100).toFixed(2)}}% done, ETA: {{(finishedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
-        <ul>
-            <li v-for="file in finishedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+        <p v-if="finishedTorrents.length">Torrents:</p>
+        <ul v-if="finishedTorrents.length">
+            <li v-for="finishedTorrent in finishedTorrents">
+                {{finishedTorrent.name}} ({{finishedTorrent.length}} bytes)
+                <br>
+                {{(finishedTorrent.progress * 100).toFixed(2)}}% done, ETA:
+                {{(finishedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
+                <ul>
+                    <li v-for="file in finishedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                </ul>
+            </li>
         </ul>
-    </li>
-</ul>
-</div>
+    </div>
 
 
-<script src="dragdrop.min.js"></script>
-<script src="webtorrent.min.js"></script>
-<script src="vuep.js"></script>
-<script src="filetransfer.js"></script>
-<script src="jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).bind('dragover', function (e) {
-        var dropZone = $('.zone'),
-        timeout = window.dropZoneTimeout;
-        if (!timeout) {
-            dropZone.addClass('in');
-        } else {
-            clearTimeout(timeout);
-        }
-        var found = false,
-        node = e.target;
-        do {
-            if (node === dropZone[0]) {
-                found = true;
-                break;
+    <script src="dragdrop.min.js"></script>
+    <script src="webtorrent.min.js"></script>
+    <script src="vuep.js"></script>
+    <script src="filetransfer.js"></script>
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).bind('dragover', function (e) {
+            var dropZone = $('.zone'),
+                timeout = window.dropZoneTimeout;
+            if (!timeout) {
+                dropZone.addClass('in');
+            } else {
+                clearTimeout(timeout);
             }
-            node = node.parentNode;
-        } while (node != null);
-        if (found) {
-            dropZone.addClass('hover');
-        } else {
-            dropZone.removeClass('hover');
-        }
-        window.dropZoneTimeout = setTimeout(function () {
-            window.dropZoneTimeout = null;
-            dropZone.removeClass('in hover');
-        }, 100);
-    });
-</script>
+            var found = false,
+                node = e.target;
+            do {
+                if (node === dropZone[0]) {
+                    found = true;
+                    break;
+                }
+                node = node.parentNode;
+            } while (node != null);
+            if (found) {
+                dropZone.addClass('hover');
+            } else {
+                dropZone.removeClass('hover');
+            }
+            window.dropZoneTimeout = setTimeout(function () {
+                window.dropZoneTimeout = null;
+                dropZone.removeClass('in hover');
+            }, 100);
+        });
+    </script>
 </body>
+
 </html>
