@@ -1,0 +1,143 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:400,700,500,300);
+
+body {
+  background: #fff;
+  font-family: "Exo 2";
+}
+#app{
+  text-align: center;
+}
+img{
+      position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    max-width: 100px;
+    margin-bottom: 20px;
+    margin-left: -50px;
+}
+.fas{
+  font-size: 90px;
+}
+#dropZ{
+  position: relative;
+  top: 40%;
+  transform: translateY(-40%);
+}
+#dropZ div{
+    margin: 5px 0px;
+}
+input, input:focus, input:active{
+  border-radius: 4px;
+    border: none;
+    padding: 5px 5px 5px 5px;
+    outline: none;
+    color: #4b74ff;
+}
+input::placeholder{
+    color: #4b74ff;
+}
+
+button, button:active{
+  outline: none;
+      cursor: pointer;
+}
+#file{
+  background: #fff;
+}
+.zone {      
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(ellipse at center,#3e63e0 0,#4b74ff 100%);
+  width:90%;
+  max-width: 700px;
+  height:50%;
+  max-height: 500px;  
+  border:5px dashed white;
+  text-align:center;
+  color: white;
+  z-index: 20;
+  transition: all 0.3s ease-out;
+  box-shadow: 0 5px 18px #d2d2d2 !important;
+  .btnCompression {
+    .btn {
+
+    } 
+    .active {
+      background: #EB6A5A;
+      color:white;
+    }
+  }
+  i {
+    text-align: center;
+    font-size: 10em;  
+    color:#fff;
+    margin-top: 50px;
+  }
+  .selectFile {
+    height: 50px;
+    margin: 20px auto;
+    position: relative;
+    width: 200px;          
+  }
+
+  label, input {
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 5px;          
+  }
+
+  label {
+    background: #fff;
+    color:#EB6A5A;
+    display: inline-block;
+    font-size: 1.2em;
+    line-height: 50px;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 400;   
+    box-shadow: 0 1px 1px gray;
+  }
+
+  input[type=file] {
+    opacity: 0;
+  }
+
+}
+.zone.in {
+  color:white;
+  border-color:white;
+  background: radial-gradient(ellipse at center,#EB6A5A 0,#c9402f 100%);
+  i {          
+    color:#fff;
+  }
+  label {
+    background: #fff;
+    color:#EB6A5A;
+  }
+}
+.zone.hover {
+  color:gray;
+  border-color:white;
+  background:#fff;
+  border:5px dashed gray;
+  i {          
+    color:#EB6A5A;
+  }
+  label {
+    background: #fff;
+    color:#EB6A5A;
+  }
+}
+.zone.fade {
+  transition: all 0.3s ease-out;
+  opacity: 1;
+}
