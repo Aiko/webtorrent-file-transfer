@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div style="height: 400px; width: 400px; background-color: red;" id="filedrop"></div>
+            <div v-if="torrent">
+                {{torrent.name}} ({{torrent.length}} bytes): <a href="#">{{torrent.magnetURI}}</a>
+                <ul>
+                    <li v-for="file in torrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                </ul>
+            </div>
+            <br><hr><br>
+            <input :disabled="loading" :style="'color:' + (magnetValid ? 'green' : 'red')" v-model="magnet" placeholder="magnet:"/>
+            <button v-if="magnetValid" :disabled="loading" @click="download">Download</button>
+            <p v-if="error">{{error}}</p>
+            <p v-if="addedTorrents.length">Loading torrents:</p>
+            <ul v-if="addedTorrents.length">
+                <li v-for="addedTorrent in addedTorrents">
+                    {{addedTorrent.name}} ({{addedTorrent.length}} bytes)
+                    <br>
+                    {{(addedTorrent.progress * 100).toFixed(2)}}% done, ETA: {{(addedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
+                    <ul>
+                        <li v-for="file in addedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                    </ul>
+                </li>
+            </ul>
+            <p v-if="finishedTorrents.length">Torrents:</p>
+            <ul v-if="finishedTorrents.length">
+                <li v-for="finishedTorrent in finishedTorrents">
+                    {{finishedTorrent.name}} ({{finishedTorrent.length}} bytes)
+                    <br>
+                    {{(finishedTorrent.progress * 100).toFixed(2)}}% done, ETA: {{(finishedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
+                    <ul>
+                        <li v-for="file in finishedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <script src="dragdrop.min.js"></script>
+        <script src="webtorrent.min.js"></script>
+        <script src="vuep.js"></script>
+        <script src="filetransfer.js"></script>
+    </body>
+</html>
