@@ -64,7 +64,12 @@ const app = new Vue({
 
 state.load(app).then(async () => {
     app.loading = true
+    if (window.location.hash) {
+        app.magnet = window.location.hash.slice(1)
+        if (!app.magnetValid) app.magnet = ''
+    }
     if (app.browserSupported) await app.init()
+    if (app.magnet && app.magnetValid) app.download() // if we've put a magnet in already, start the download of that torrent
     DragDrop('body', files => app.seed(files))
 }).catch(async e => {
     await state.clear()
