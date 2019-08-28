@@ -183,12 +183,23 @@ button, button:active{
     margin-right: 10px;
     font-size: 14px !important;
 }
+.progress{
+  display: inline;
+  margin-left: 10px;
+  max-width: 50%;
+}
+.torrent input{
+    margin-left: 10px;
+}
+.fa-link{
+  color: #fff;
+  margin-left: 10px;
+}
 .torrent i{
   font-size: 20px;
 }
 .torrent p{
     display: inline;
-    margin-left: 10px;
     font-size: 19px;
 }
 .display{

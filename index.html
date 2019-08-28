@@ -39,9 +39,17 @@
 
 
 
+
                     <div class="torrent">
-                        <i class="fas fa-link"></i><p>Name<span>119KB</span></p><div class="progress "></div>
+                        <p>Name<span>119KB</span></p>
+
+                        <!-- Progress (hide share) -->
+                        <div class="progress "></div>
+
+                        <!-- Share (hide progress) -->
+                        <input type="" name="" placeholder="magnet:?rfhbeirhvbehvbeihrbvie"><a href="#"><i class="fas fa-link"></i></a>
                         
+                        <!-- Files (hide Download for Share one) -->
                         <div class="file"><i class="fas fa-image"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
 
                         <div class="file"><i class="fas fa-file"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
@@ -93,10 +101,9 @@
             </ul>
         </div>
 
-
+        <script src="vuep.js"></script>
         <script src="dragdrop.min.js"></script>
         <script src="webtorrent.min.js"></script>
-        <script src="vuep.js"></script>
         <script src="filetransfer.js"></script>
     </body>
 
