@@ -37,9 +37,17 @@ const app = new Vue({
             await state.save(app)
             this.loading = false
         },
+        async maybeSeed() {
+            const files = document.getElementById('file').files
+            if (files) await this.seed(files)
+        },
         async seed(files) {
+            this.loading = true
             if (!files || !files.length || files.length == 0) return;
-            this.client.seed(files, torrent => (app.torrent = torrent))
+            this.client.seed(files, torrent => {
+                app.torrent = torrent
+                app.loading = false
+            })
         },
         async download() {
             this.loading = true
@@ -57,7 +65,7 @@ const app = new Vue({
 state.load(app).then(async () => {
     app.loading = true
     if (app.browserSupported) await app.init()
-    DragDrop('#filedrop', files => app.seed(files))
+    DragDrop('#dropZ', files => app.seed(files))
 }).catch(async e => {
     await state.clear()
     console.error(e)
