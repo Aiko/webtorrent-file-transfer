@@ -9,8 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 </head>
 
 <body>
@@ -76,36 +75,6 @@
     <script src="webtorrent.min.js"></script>
     <script src="vuep.js"></script>
     <script src="filetransfer.js"></script>
-    <script src="jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).bind('dragover', function (e) {
-            var dropZone = $('.zone'),
-                timeout = window.dropZoneTimeout;
-            if (!timeout) {
-                dropZone.addClass('in');
-            } else {
-                clearTimeout(timeout);
-            }
-            var found = false,
-                node = e.target;
-            do {
-                if (node === dropZone[0]) {
-                    found = true;
-                    break;
-                }
-                node = node.parentNode;
-            } while (node != null);
-            if (found) {
-                dropZone.addClass('hover');
-            } else {
-                dropZone.removeClass('hover');
-            }
-            window.dropZoneTimeout = setTimeout(function () {
-                window.dropZoneTimeout = null;
-                dropZone.removeClass('in hover');
-            }, 100);
-        });
-    </script>
 </body>
 
 </html>
