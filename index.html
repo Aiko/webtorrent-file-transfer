@@ -28,53 +28,76 @@
                 </div>
                 <span>OR</span>
                 <div>Download using a magnet link. <input @keyup.enter="download" type="text" :disabled="loading"
-                        v-model="magnet" placeholder="magnet:"></div>
+                    v-model="magnet" placeholder="magnet:"></div>
+                </div>
             </div>
-        </div>
-        <a href="https://helloaiko.com" target="_blank" class="no-mobile"><img src="power.png"></a>
-        <a href="https://helloaiko.com" target="_blank" class="no-desktop"><img src="power-white.png"></a>
+            <a href="https://helloaiko.com" target="_blank" class="no-mobile"><img src="power.png"></a>
+            <a href="https://helloaiko.com" target="_blank" class="no-desktop"><img src="power-white.png"></a>
+
+            <div class="zone2">
+                <div class="display">
 
 
-        <!-- OLD STUFF -->
 
-        <div v-if="torrent">
-            {{torrent.name}} ({{torrent.length}} bytes): <a href="#">{{torrent.magnetURI}}</a>
-            <ul>
-                <li v-for="file in torrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                    <div class="torrent">
+                        <i class="fas fa-link"></i><p>Name<span>119KB</span></p><div class="progress "></div>
+                        
+                        <div class="file"><i class="fas fa-image"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
+
+                        <div class="file"><i class="fas fa-file"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
+
+                        <div class="file"><i class="fas fa-video"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+            <!-- OLD STUFF -->
+
+            <div v-if="torrent">
+                {{torrent.name}} ({{torrent.length}} bytes): <a href="#">{{torrent.magnetURI}}</a>
+                <ul>
+                    <li v-for="file in torrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                </ul>
+            </div>
+            <p v-if="error">{{error}}</p>
+            <p v-if="addedTorrents.length">Loading torrents:</p>
+            <ul v-if="addedTorrents.length">
+                <li v-for="addedTorrent in addedTorrents">
+                    {{addedTorrent.name}} ({{addedTorrent.length}} bytes)
+                    <br>
+                    {{(addedTorrent.progress * 100).toFixed(2)}}% done, ETA:
+                    {{(addedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
+                    <ul>
+                        <li v-for="file in addedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                    </ul>
+                </li>
+            </ul>
+            <p v-if="finishedTorrents.length">Torrents:</p>
+            <ul v-if="finishedTorrents.length">
+                <li v-for="finishedTorrent in finishedTorrents">
+                    {{finishedTorrent.name}} ({{finishedTorrent.length}} bytes)
+                    <br>
+                    {{(finishedTorrent.progress * 100).toFixed(2)}}% done, ETA:
+                    {{(finishedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
+                    <ul>
+                        <li v-for="file in finishedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
+                    </ul>
+                </li>
             </ul>
         </div>
-        <p v-if="error">{{error}}</p>
-        <p v-if="addedTorrents.length">Loading torrents:</p>
-        <ul v-if="addedTorrents.length">
-            <li v-for="addedTorrent in addedTorrents">
-                {{addedTorrent.name}} ({{addedTorrent.length}} bytes)
-                <br>
-                {{(addedTorrent.progress * 100).toFixed(2)}}% done, ETA:
-                {{(addedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
-                <ul>
-                    <li v-for="file in addedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
-                </ul>
-            </li>
-        </ul>
-        <p v-if="finishedTorrents.length">Torrents:</p>
-        <ul v-if="finishedTorrents.length">
-            <li v-for="finishedTorrent in finishedTorrents">
-                {{finishedTorrent.name}} ({{finishedTorrent.length}} bytes)
-                <br>
-                {{(finishedTorrent.progress * 100).toFixed(2)}}% done, ETA:
-                {{(finishedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
-                <ul>
-                    <li v-for="file in finishedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
 
 
-    <script src="dragdrop.min.js"></script>
-    <script src="webtorrent.min.js"></script>
-    <script src="vuep.js"></script>
-    <script src="filetransfer.js"></script>
-</body>
+        <script src="dragdrop.min.js"></script>
+        <script src="webtorrent.min.js"></script>
+        <script src="vuep.js"></script>
+        <script src="filetransfer.js"></script>
+    </body>
 
-</html>
+    </html>

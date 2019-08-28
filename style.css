@@ -16,6 +16,16 @@ body {
   .no-desktop{
   display: unset !important;
 }
+.zone2 {
+border: none !important;
+box-shadow: none !important;
+background: #4b74ff !important;
+  }
+  .zone {
+border: none !important;
+box-shadow: none !important;
+background: #4b74ff !important;
+  }
 }
 .no-desktop{
   display: none;
@@ -74,6 +84,135 @@ button, button:active{
   text-align:center;
   color: white;
   z-index: 20;
+  transition: all 0.3s ease-out;
+  box-shadow: 0 5px 18px #d2d2d2;
+  transition: .2s;
+  .btnCompression {
+    .btn {
+
+    } 
+    .active {
+      background: #fff;
+      color:white;
+    }
+  }
+  i {
+    text-align: center;
+    font-size: 10em;  
+    color:#fff;
+    margin-top: 50px;
+  }
+  .selectFile {
+    height: 50px;
+    margin: 20px auto;
+    position: relative;
+    width: 200px;          
+  }
+
+  label, input {
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 5px;          
+  }
+
+  label {
+    background: #fff;
+    color:#EB6A5A;
+    display: inline-block;
+    font-size: 1.2em;
+    line-height: 50px;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 400;   
+    box-shadow: 0 1px 1px gray;
+  }
+
+  input[type=file] {
+    opacity: 0;
+  }
+
+}
+.display{
+    min-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 20px;
+}
+.file{
+    width: 100%;
+    background: #fff;
+    border-radius: 4px;
+    color: #000;
+    padding: 5px 10px;
+    line-height: 20px;
+    max-width: fit-content;
+    margin-top: 10px;
+}
+
+.file p {
+  font-size: 14px;
+}
+.file a{
+  color: #4b74ff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .2s;
+}
+.file a:hover{
+  color: #4065e5;
+    transition: .2s;
+}
+.torrent span{
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.file span{
+  color: #5b5b5b;
+}
+.file p{
+  display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px !important;
+}
+.torrent i{
+  font-size: 20px;
+}
+.torrent p{
+    display: inline;
+    margin-left: 10px;
+    font-size: 19px;
+}
+.display{
+  min-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+}
+.torrent{
+  text-align: left;
+}
+.zone2 {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: radial-gradient(ellipse at center,#3e63e0 0,#4b74ff 100%);
+  width:90%;
+  max-width: 700px;
+  height:50%;
+  max-height: 500px;  
+  border: 5px dashed white;
+  text-align:center;
+  color: white;
+  z-index: 30;
   transition: all 0.3s ease-out;
   box-shadow: 0 5px 18px #d2d2d2;
   transition: .2s;
