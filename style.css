@@ -9,16 +9,10 @@ body {
   body {
     background: #4b74ff;
     transition: .2s;
-  }
-  .zone{
-    border: none !important;
-    box-shadow: none !important;
-    background: #4b74ff !important;
-    transition: .2s;
-  }
-  .no-mobile{
-    display: none;
-  }
+}
+.no-mobile{
+  display: none;
+}
   .no-desktop{
   display: unset !important;
 }
@@ -88,7 +82,7 @@ button, button:active{
 
     } 
     .active {
-      background: #EB6A5A;
+      background: #fff;
       color:white;
     }
   }
@@ -150,7 +144,7 @@ button, button:active{
 .zone.hover {
   color:gray;
   border-color:white;
-  background:#fff;
+  background:#fff !important;
   border:5px dashed gray;
   i {          
     color:#EB6A5A;
