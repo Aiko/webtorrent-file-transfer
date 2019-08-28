@@ -67,7 +67,7 @@ button, button:active{
 #file{
   background: #fff;
 }
-.zone {      
+.zone {
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
@@ -135,11 +135,12 @@ button, button:active{
   }
 
 }
+
 .zone.in {
   color:white;
   border-color:white;
   background: radial-gradient(ellipse at center,#EB6A5A 0,#c9402f 100%);
-  i {          
+  i {
     color:#fff;
   }
   label {
@@ -147,7 +148,8 @@ button, button:active{
     color:#EB6A5A;
   }
 }
-.zone.hover {
+
+body.drag .zone {
   color:gray;
   border-color:white;
   background:#fff;

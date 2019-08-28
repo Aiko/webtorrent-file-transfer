@@ -65,7 +65,7 @@ const app = new Vue({
 state.load(app).then(async () => {
     app.loading = true
     if (app.browserSupported) await app.init()
-    DragDrop('#dropZ', files => app.seed(files))
+    DragDrop('body', files => app.seed(files))
 }).catch(async e => {
     await state.clear()
     console.error(e)
