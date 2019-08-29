@@ -520,3 +520,6 @@ body.drag .zone {
     background-color: #3d63df!important;
     border: 1px solid #2f52c8;
 }
+.w3-green, .w3-hover-green:hover{
+      background-color: #5e83ff!important;
+}
