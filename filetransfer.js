@@ -26,6 +26,79 @@ window.copy = t => {
         document.getSelection().addRange(selected)
     }
 }
+
+const ext2icon = ext => {
+    switch (ext) {
+        case 'gz': return 'fa-file-archive';
+        case 'zip': return 'fa-file-archive';
+        case 'tar': return 'fa-file-archive';
+        case '7z': return 'fa-file-archive';
+        case 'rar': return 'fa-file-archive';
+
+        case 'mp3': return 'fa-file-audio';
+        case 'aac': return 'fa-file-audio';
+        case 'ogg': return 'fa-file-audio';
+        case 'wav': return 'fa-file-audio';
+        case 'raw': return 'fa-file-audio';
+
+        case 'js': return 'fa-file-code';
+        case 'css': return 'fa-file-code';
+        case 'cpp': return 'fa-file-code';
+        case 'java': return 'fa-file-code';
+        case 'class': return 'fa-file-code';
+        case 'py': return 'fa-file-code';
+        case 'cs': return 'fa-file-code';
+        case 'gml': return 'fa-file-code';
+        case 'bin': return 'fa-file-code';
+        case 'asm': return 'fa-file-code';
+        case 'pl': return 'fa-file-code';
+        case 'hs': return 'fa-file-code';
+        case 'jsx': return 'fa-file-code';
+        case 'ts': return 'fa-file-code';
+        case 'html': return 'fa-file-code';
+        case 'json': return 'fa-file-code';
+        case 'sh': return 'fa-file-code';
+        case 'env': return 'fa-file-code';
+
+        case 'xls': return 'fa-file-excel';
+        case 'xlsx': return 'fa-file-excel';
+        case 'csv': return 'fa-file-excel';
+        case 'numbers': return 'fa-file-excel';
+
+        case 'jpg': return 'fa-file-image';
+        case 'jpeg': return 'fa-file-image';
+        case 'png': return 'fa-file-image';
+        case 'gif': return 'fa-file-image';
+        case 'psd': return 'fa-file-image';
+        case 'ai': return 'fa-file-image';
+        case 'tiff': return 'fa-file-image';
+        case 'bmp': return 'fa-file-image';
+        case 'riff': return 'fa-file-image';
+        case 'xbmp': return 'fa-file-image';
+        case 'webp': return 'fa-file-image';
+
+        case 'mp4': return 'fa-file-movie';
+        case 'avi': return 'fa-file-movie';
+        case 'wmv': return 'fa-file-movie';
+        case 'flv': return 'fa-file-movie';
+        case 'mov': return 'fa-file-movie';
+        case 'webm': return 'fa-file-movie';
+        case 'mpeg': return 'fa-file-movie';
+        case 'mpg': return 'fa-file-movie';
+        case 'mpv': return 'fa-file-movie';
+
+        case 'doc': return 'fa-file-word';
+        case 'docx': return 'fa-file-word';
+        case 'txt': return 'fa-file-text';
+        case 'pdf': return 'fa-file-pdf';
+
+        case 'ppt': return 'fa-file-powerpoint';
+        case 'pptx': return 'fa-file-powerpoint';
+        case 'odp': return 'fa-file-powerpoint';
+
+        default: return 'fa-file';
+    }
+}
 ////////////////////////////////////////////////////////////////
 
 const state = VueP('aiko-file-transfer')
@@ -78,15 +151,18 @@ const app = new Vue({
         async seed(files) {
             this.loading = true
             if (!files || !files.length || files.length == 0) return;
-            this.client.seed(files, torrent => {
-                app.torrent = torrent
-                app.loading = false
-            })
+            this.client.seed(files, {
+                    announce: ['wss://tracker.openwebtorrent.com']
+                },
+                torrent => {
+                    app.torrent = torrent
+                    app.loading = false
+                })
         },
         async download() {
             this.loading = true
             if (!this.magnetValid) return (this.error = 'Magnet URI is not valid 😢');
-            const metadata = this.client.add(this.magnet, torrent => {
+            const metadata = this.client.add(this.magnet, async torrent => {
                 this.finishedTorrents.push(torrent)
                 this.addedTorrents = this.addedTorrents.filter(t => t.magnetURI != torrent.magnetURI)
                 this.loading = false
@@ -95,6 +171,9 @@ const app = new Vue({
         },
         async copy(t) {
             window.copy(t)
+        },
+        file2icon(fn) {
+            return ext2icon(fn.split('.').reduceRight(_ => _))
         }
     }
 })

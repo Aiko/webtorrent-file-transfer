@@ -43,7 +43,7 @@
                     <a href="#" @click="copy(torrent.magnetURI)"><i class="fas fa-magnet"></i></a>
 
                     <div class="file" v-for="file in torrent.files">
-                        <i class="fas fa-image"></i>
+                        <i :class="['fas', file2icon(file.name)]"></i>
                         <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                         </div>
                     </div>
                     <div class="file" v-for="file in addedTorrent.files">
-                        <i class="fas fa-image"></i>
-                        <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p><a href="#">Download</a>
+                        <i :class="['fas', file2icon(file.name)]"></i>
+                        <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p>
                     </div>
                 </div>
                 <div class="torrent" v-for="finishedTorrent in finishedTorrents">
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="file" v-for="file in finishedTorrent.files">
-                        <i class="fas fa-image"></i>
+                        <i :class="['fas', file2icon(file.name)]"></i>
                         <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p><a href="#">Download</a>
                     </div>
                 </div>
