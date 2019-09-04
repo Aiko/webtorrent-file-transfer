@@ -40,8 +40,8 @@
                     <p>{{torrent.name}}<span v-if="torrent.length">{{torrent.length.toFilesize()}}</span></p>
 
                     <input @click="copy(shareLink)" :value="shareLink" disabled type="url" name="Share Link" placeholder="Share Link">
-                    <a href="#" @click="copy(shareLink)"><i class="fas fa-copy"></i></a>
-                    <a href="#" @click="copy(torrent.magnetURI)"><i class="fas fa-magnet"></i></a>
+                    <a href="#" @click="copy(shareLink)" title="Copy link" style=" margin-left: 5px;"><i class="fas fa-copy"></i></a>
+                    <a href="#" @click="copy(torrent.magnetURI)" style=" margin-left: 5px;"><i class="fas fa-magnet"></i></a>
 
                     <div class="file" v-for="file in torrent.files">
                         <i :class="['fas', file2icon(file.name)]"></i>
