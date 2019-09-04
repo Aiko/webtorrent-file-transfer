@@ -13,7 +13,7 @@
 </head>
 
 <body>
-   <!-- <div class="loader-6 center-loader" id="fixed"><span></span></div> -->
+   <div class="loader-6 center-loader" id="fixed"><span></span></div>
     <div id="app">
 
         <!-- Initialize Download or Upload -->
@@ -37,6 +37,7 @@
         <div class="zone2" v-if="torrent">
             <div class="display">
                 <div class="torrent">
+                    <h1 style="margin-top: 0">Share your link</h1>
                     <p>{{torrent.name}}<span v-if="torrent.length">{{torrent.length.toFilesize()}}</span></p>
 
                     <input @click="copy(shareLink)" :value="shareLink" disabled type="url" name="Share Link" placeholder="Share Link">
