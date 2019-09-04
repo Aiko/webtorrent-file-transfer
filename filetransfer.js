@@ -159,7 +159,7 @@ const app = new Vue({
                     app.loading = false
                 })
         },
-        async download() {
+        async download() { // for torrents
             this.loading = true
             if (!this.magnetValid) return (this.error = 'Magnet URI is not valid 😢');
             const metadata = this.client.add(this.magnet, async torrent => {
@@ -168,6 +168,12 @@ const app = new Vue({
                 this.loading = false
             })
             this.addedTorrents.push(metadata)
+        },
+        async downloadFile(f) {
+            f.getBlob((err, blob) => {
+                if (err) return console.error(err);
+                if (blob) saveAs(blob)
+            })
         },
         async copy(t) {
             window.copy(t)

@@ -15,7 +15,6 @@
 <body>
     <div id="app">
 
-        <!-- Initialize Download or Upload -->
         <div class="zone" v-if="!torrent && !(addedTorrents.length) && !(finishedTorrents.length)">
             <div id="dropZ">
                 <i class="fas fa-cloud-upload-alt"></i>
@@ -77,7 +76,7 @@
                     </div>
                     <div class="file" v-for="file in finishedTorrent.files">
                         <i :class="['fas', file2icon(file.name)]"></i>
-                        <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p><a href="#">Download</a>
+                        <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p><a @click="downloadFile(file)" v-if="file.done" href="#">Download</a>
                     </div>
                 </div>
             </div>
@@ -86,6 +85,7 @@
 
     <script src="vuep.js"></script>
     <script src="dragdrop.min.js"></script>
+    <script src="filesaver.min.js"></script>
     <script src="webtorrent.min.js"></script>
     <script src="filetransfer.js"></script>
 </body>
