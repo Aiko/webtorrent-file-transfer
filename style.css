@@ -214,8 +214,9 @@ button, button:active{
 }
 .zone2 {
   margin: auto;
+  margin-top: 3vh;
   position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+   left: 0; right: 0;
   background: radial-gradient(ellipse at center,#3e63e0 0,#4b74ff 100%);
   width:90%;
   max-width: 700px;
@@ -523,6 +524,10 @@ body.drag .zone {
 }
 .w3-green, .w3-hover-green:hover{
       background-color: #5e83ff!important;
+
+}
+.w3-green, .w3-hover-green{
+      white-space: nowrap;
 }
 
 
