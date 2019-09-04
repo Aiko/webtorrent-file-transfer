@@ -62,7 +62,7 @@ const app = new Vue({
             return (!!this.magnet && /magnet:\?xt=urn:[a-z0-9]+:[a-z0-9]{32}/i.test(this.magnet))
         },
         shareLink() {
-            return window.location.origin + '/#' + torrent.magnetURI
+            return window.location.origin + '/#' + this.torrent.magnetURI
         }
     },
     methods: {
