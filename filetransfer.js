@@ -1,3 +1,33 @@
+//////////////////// Polyfills
+Number.prototype.toFilesize = function () {
+    const byte = 1
+    const kilobyte = byte * 1000
+    const megabyte = kilobyte * 1000
+    const gigabyte = megabyte * 1000
+    if (this > gigabyte) return (this / gigabyte).toFixed(2) + ' GB'
+    if (this > megabyte) return (this / megabyte).toFixed(2) + ' MB'
+    if (this > kilobyte) return (this / kilobyte).toFixed(2) + ' KB'
+    return this + ' bytes'
+}
+
+window.copy = t => {
+    const el = document.createElement('textarea')
+    el.value = t
+    el.setAttribute('readonly', '')
+    el.style.position = 'absolute'
+    el.style.left = '-9999px'
+    document.body.appendChild(el)
+    const selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false
+    el.select()
+    document.execCommand('copy')
+    document.body.removeChild(el)
+    if (selected) {
+        document.getSelection().removeAllRanges()
+        document.getSelection().addRange(selected)
+    }
+}
+////////////////////////////////////////////////////////////////
+
 const state = VueP('aiko-file-transfer')
 // for allowing the possibility of persistence && auth in the future
 
@@ -10,17 +40,6 @@ state.ignoreMany(
     'finishedTorrents',
     'addedTorrents'
 )
-
-Number.prototype.toFilesize = function () {
-    const byte = 1
-    const kilobyte = byte * 1000
-    const megabyte = kilobyte * 1000
-    const gigabyte = megabyte * 1000
-    if (this > gigabyte) return (this / gigabyte).toFixed(2) + ' GB'
-    if (this > megabyte) return (this / megabyte).toFixed(2) + ' MB'
-    if (this > kilobyte) return (this / kilobyte).toFixed(2) + ' KB'
-    return this + ' bytes'
-}
 
 const app = new Vue({
     el: '#app',
@@ -42,7 +61,8 @@ const app = new Vue({
         magnetValid() {
             return (!!this.magnet && /magnet:\?xt=urn:[a-z0-9]+:[a-z0-9]{32}/i.test(this.magnet))
         },
-        torrentSize() {
+        shareLink() {
+            return window.location.origin + '/#' + torrent.magnetURI
         }
     },
     methods: {
@@ -72,6 +92,9 @@ const app = new Vue({
                 this.loading = false
             })
             this.addedTorrents.push(metadata)
+        },
+        async copy(t) {
+            window.copy(t)
         }
     }
 })
