@@ -15,9 +15,8 @@
 <body>
     <div id="app">
 
-
         <!-- Initialize Download or Upload -->
-        <div class="zone">
+        <div class="zone" v-if="!torrent && !(addedTorrents.length) && !(finishedTorrents.length)">
             <div id="dropZ">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <div>Drag and drop your file here</div>
@@ -28,82 +27,70 @@
                 </div>
                 <span>OR</span>
                 <div>Download using a magnet link. <input @keyup.enter="download" type="text" :disabled="loading"
-                    v-model="magnet" placeholder="magnet:"></div>
-                </div>
+                        v-model="magnet" placeholder="magnet:"></div>
             </div>
-            <a href="https://helloaiko.com" target="_blank" class="no-mobile"><img src="power.png"></a>
-            <a href="https://helloaiko.com" target="_blank" class="no-desktop"><img src="power-white.png"></a>
+        </div>
+        <a href="https://helloaiko.com" target="_blank" class="no-mobile"><img src="power.png"></a>
+        <a href="https://helloaiko.com" target="_blank" class="no-desktop"><img src="power-white.png"></a>
 
-            <div class="zone2">
-                <div class="display">
+        <div class="zone2" v-if="torrent">
+            <div class="display">
+                <div class="torrent">
+                    <p>{{torrent.name}}<span v-if="torrent.length">{{torrent.length.toFilesize()}}</span></p>
 
-                    <div class="torrent">
-                        <p>Name<span>119KB</span></p>
+                    <input v-model="torrent.magnetURI" disabled type="" name="" placeholder="magnet:?">
+                    <a href="#"><i class="fas fa-link"></i></a>
 
-                        <!-- Progress (hide share) -->
-                        <div class="w3-light-grey" style="display: inline-block;width: 100px;border-radius: 2px;">
-                            <div class="w3-container w3-green w3-center" style="width:50%;padding:0">50%</div>
-                        </div>
-
-                        <!-- Share (hide progress) -->
-                        <input type="" name="" placeholder="magnet:?rfhbeirhvbehvbeihrbvie"><a href="#"><i class="fas fa-link"></i></a>
-                        
-                        <!-- Files (hide Download for Share one) -->
-                        <div class="file"><i class="fas fa-image"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
-
-                        <div class="file"><i class="fas fa-file"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
-
-                        <div class="file"><i class="fas fa-video"></i><p>FileName.png<span>119KB</span></p><a>Download</a></div>
-
+                    <div class="file" v-for="file in torrent.files">
+                        <i class="fas fa-image"></i>
+                        <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p>
                     </div>
-
-
-
                 </div>
             </div>
-
-
-
-
-            <!-- OLD STUFF -->
-
-            <div v-if="torrent">
-                {{torrent.name}} ({{torrent.length}} bytes): <a href="#">{{torrent.magnetURI}}</a>
-                <ul>
-                    <li v-for="file in torrent.files">{{file.name}} ({{file.length}} bytes)</li>
-                </ul>
-            </div>
-            <p v-if="error">{{error}}</p>
-            <p v-if="addedTorrents.length">Loading torrents:</p>
-            <ul v-if="addedTorrents.length">
-                <li v-for="addedTorrent in addedTorrents">
-                    {{addedTorrent.name}} ({{addedTorrent.length}} bytes)
-                    <br>
-                    {{(addedTorrent.progress * 100).toFixed(2)}}% done, ETA:
-                    {{(addedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
-                    <ul>
-                        <li v-for="file in addedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
-                    </ul>
-                </li>
-            </ul>
-            <p v-if="finishedTorrents.length">Torrents:</p>
-            <ul v-if="finishedTorrents.length">
-                <li v-for="finishedTorrent in finishedTorrents">
-                    {{finishedTorrent.name}} ({{finishedTorrent.length}} bytes)
-                    <br>
-                    {{(finishedTorrent.progress * 100).toFixed(2)}}% done, ETA:
-                    {{(finishedTorrent.timeRemaining / 1000).toFixed(0)}} seconds
-                    <ul>
-                        <li v-for="file in finishedTorrent.files">{{file.name}} ({{file.length}} bytes)</li>
-                    </ul>
-                </li>
-            </ul>
         </div>
 
-        <script src="vuep.js"></script>
-        <script src="dragdrop.min.js"></script>
-        <script src="webtorrent.min.js"></script>
-        <script src="filetransfer.js"></script>
-    </body>
+        <div class="zone2" v-if="addedTorrents.length || finishedTorrents.length">
+            <div class="display">
+                <div class="torrent" v-for="addedTorrent in addedTorrents">
+                    <p>{{addedTorrent.name}}<span v-if="addedTorrent.length">{{addedTorrent.length.toFilesize()}}</span></p>
+                    <!-- Progress (hide share) -->
+                    <div class="w3-light-grey" style="display: inline-block;width: 100px;border-radius: 2px;">
+                        <div class="w3-container w3-green w3-center"
+                            :style="'width:' + (addedTorrent.progress * 100) + '%;padding:0'">
+                            {{(addedTorrent.progress * 100).toFixed(2)}}%
+                            ({{(addedTorrent.timeRemaining /  1000).toFixed(0)}}s ETA)
+                        </div>
+                    </div>
+                    <!-- Files (hide Download for Share one) -->
+                    <div class="file" v-for="file in addedTorrent.files">
+                        <i class="fas fa-image"></i>
+                        <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p><a href="#">Download</a>
+                    </div>
+                </div>
+                <div class="torrent" v-for="finishedTorrent in finishedTorrents">
+                    <p>{{finishedTorrent.name}}<span v-if="finishedTorrent.length">{{finishedTorrent.length.toFilesize()}}</span></p>
+                    <!-- Progress (hide share) -->
+                    <div class="w3-light-grey" style="display: inline-block;width: 100px;border-radius: 2px;">
+                        <div class="w3-container w3-green w3-center"
+                            :style="'width:' + (finishedTorrent.progress * 100) + '%;padding:0'">
+                            {{(finishedTorrent.progress * 100).toFixed(2)}}%
+                            ({{(finishedTorrent.timeRemaining /  1000).toFixed(0)}}s ETA)
+                        </div>
+                    </div>
+                    <!-- Files (hide Download for Share one) -->
+                    <div class="file" v-for="file in finishedTorrent.files">
+                        <i class="fas fa-image"></i>
+                        <p>{{file.name}}<span v-if="file.length">{{file.length.toFilesize()}}</span></p><a href="#">Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </html>
+    <script src="vuep.js"></script>
+    <script src="dragdrop.min.js"></script>
+    <script src="webtorrent.min.js"></script>
+    <script src="filetransfer.js"></script>
+</body>
+
+</html>

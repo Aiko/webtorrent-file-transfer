@@ -6,9 +6,21 @@ state.ignoreMany(
     'error',
     'client',
     'torrent',
+    'magnet',
     'finishedTorrents',
     'addedTorrents'
 )
+
+Number.prototype.toFilesize = function () {
+    const byte = 1
+    const kilobyte = byte * 1000
+    const megabyte = kilobyte * 1000
+    const gigabyte = megabyte * 1000
+    if (this > gigabyte) return (this / gigabyte).toFixed(2) + ' GB'
+    if (this > megabyte) return (this / megabyte).toFixed(2) + ' MB'
+    if (this > kilobyte) return (this / kilobyte).toFixed(2) + ' KB'
+    return this + ' bytes'
+}
 
 const app = new Vue({
     el: '#app',
@@ -29,6 +41,8 @@ const app = new Vue({
         },
         magnetValid() {
             return (!!this.magnet && /magnet:\?xt=urn:[a-z0-9]+:[a-z0-9]{32}/i.test(this.magnet))
+        },
+        torrentSize() {
         }
     },
     methods: {
