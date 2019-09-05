@@ -141,8 +141,7 @@ button, button:active{
 
 }
 .display{
-    min-height: 100%;
-    overflow-y: scroll;
+    max-height: calc(100% - 40px);
     overflow-x: hidden;
     padding: 20px;
 }
@@ -204,10 +203,9 @@ button, button:active{
     font-size: 19px;
 }
 .display{
-  min-height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 100%;
+  max-height: calc(100% - 40px);
+  overflow-x: hidden;
+  width: calc(100% - 40px);
 }
 .torrent{
   text-align: left;
