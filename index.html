@@ -53,6 +53,7 @@
         <div class="zone2" v-if="addedTorrents.length || finishedTorrents.length">
             <div class="display">
                 <div class="torrent" v-for="addedTorrent in addedTorrents">
+                    <h1 style="margin-top: 0">Download your files</h1>
                     <p>{{addedTorrent.name}}<span v-if="addedTorrent.length">{{addedTorrent.length.toFilesize()}}</span></p>
                     <div class="w3-light-grey" style="display: inline-block;width: fit-content;padding: 0px;border-radius: 2px;">
                         <div class="w3-container w3-green w3-center"
