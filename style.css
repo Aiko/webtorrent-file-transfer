@@ -73,11 +73,11 @@ button, button:active{
   background: #fff;
 }
 .zone {
+  position: absolute;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
   background: radial-gradient(ellipse at center,#3e63e0 0,#4b74ff 100%);
   width:90%;
-  margin-top: 3vh;
   max-width: 700px;
   height:50%;
   max-height: 500px;  
@@ -211,10 +211,10 @@ button, button:active{
   text-align: left;
 }
 .zone2 {
-  margin: auto;
-  margin-top: 3vh;
   position: absolute;
-   left: 0; right: 0;
+  margin: auto;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
   background: radial-gradient(ellipse at center,#3e63e0 0,#4b74ff 100%);
   width:90%;
   max-width: 700px;
