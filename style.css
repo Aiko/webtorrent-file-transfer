@@ -10,22 +10,22 @@ body {
   body {
     background: #4b74ff;
     transition: .2s;
-}
-.no-mobile{
-  display: none;
-}
+  }
+  .no-mobile{
+    display: none;
+  }
   .no-desktop{
-  display: unset !important;
-}
-.zone2 {
-border: none !important;
-box-shadow: none !important;
-background: #4b74ff !important;
+    display: unset !important;
+  }
+  .zone2 {
+    border: none !important;
+    box-shadow: none !important;
+    background: #4b74ff !important;
   }
   .zone {
-border: none !important;
-box-shadow: none !important;
-background: #4b74ff !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #4b74ff !important;
   }
 }
 .no-desktop{
@@ -141,19 +141,19 @@ button, button:active{
 
 }
 .display{
-    max-height: calc(100% - 40px);
-    overflow-x: hidden;
-    padding: 20px;
+  max-height: calc(100% - 40px);
+  overflow-x: hidden;
+  padding: 20px;
 }
 .file{
-    width: 100%;
-    background: #fff;
-    border-radius: 4px;
-    color: #000;
-    padding: 5px 10px;
-    line-height: 20px;
-    max-width: fit-content;
-    margin-top: 10px;
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  color: #000;
+  padding: 5px 10px;
+  line-height: 20px;
+  max-width: fit-content;
+  margin-top: 10px;
 }
 
 .file p {
@@ -161,27 +161,27 @@ button, button:active{
 }
 .file a{
   color: #4b74ff;
-    font-weight: 500;
-    cursor: pointer;
-    transition: .2s;
+  font-weight: 500;
+  cursor: pointer;
+  transition: .2s;
 }
 .file a:hover{
   color: #4065e5;
-    transition: .2s;
+  transition: .2s;
 }
 .torrent span{
-    margin-left: 5px;
-    font-size: 14px;
-    font-weight: 500;
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .file span{
   color: #5b5b5b;
 }
 .file p{
   display: inline;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 14px !important;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 14px !important;
 }
 .progress{
   display: inline;
@@ -189,7 +189,7 @@ button, button:active{
   max-width: 50%;
 }
 .torrent input{
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .fa-link{
   color: #fff;
@@ -199,8 +199,8 @@ button, button:active{
   font-size: 20px;
 }
 .torrent p{
-    display: inline;
-    font-size: 19px;
+  display: inline;
+  font-size: 19px;
 }
 .display{
   max-height: calc(100% - 40px);
@@ -516,16 +516,16 @@ body.drag .zone {
 .w3-border-pale-red,.w3-hover-border-pale-red:hover{border-color:#ffe7e7!important}.w3-border-pale-green,.w3-hover-border-pale-green:hover{border-color:#e7ffe7!important}
 .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
 .w3-light-grey, .w3-hover-light-grey:hover, .w3-light-gray, .w3-hover-light-gray:hover{
-      color: #000!important;
-    background-color: #3d63df!important;
-    border: 1px solid #2f52c8;
+  color: #000!important;
+  background-color: #3d63df!important;
+  border: 1px solid #2f52c8;
 }
 .w3-green, .w3-hover-green:hover{
-      background-color: #5e83ff!important;
+  background-color: #5e83ff!important;
 
 }
 .w3-green, .w3-hover-green{
-      white-space: nowrap;
+  white-space: nowrap;
 }
 
 
@@ -581,13 +581,42 @@ body.drag .zone {
   100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0; }
 }
 .ad{
-position: absolute;
-    bottom: 0;
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 0px;
-    margin-left: -400px;
+  background: #466ef41a;
+  width: 100%;
+  border: 1px #4971fb solid;
+  padding: 5px;
+  max-width: 700px;
+  border-radius: 4px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-decoration: none;
+  color: #466ef5;
+  font-weight: 500;
+  top: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+.ad span{
+  background: #466ef5;
+  position: absolute;
+  right: 0;
+  color: #fff;
+  line-height: 20px;
+  margin-top: -20px;
+  border-radius: 4px;
+  margin-right: 5px;
+  padding: 10px;
+  transition: .2s;
+}
+.ad span:hover{
+  background: #355ad8;
+  transition: .2s;
+}
+.ad span i{
+  font-size: 20px;
+  margin-left: 3px;
 }
 /* Layout */
 .center-loader {
