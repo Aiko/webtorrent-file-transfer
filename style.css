@@ -60,16 +60,6 @@ body {
   padding: 14px !important;
   transition: .2s;
 }
-.ad span:hover{
-  background: #355ad8;
-  transition: .2s;
-}
-.ad span i{
-  font-size: 20px;
-  margin-left: 3px;
-}
-
-
 }
 .no-desktop{
   display: none;
