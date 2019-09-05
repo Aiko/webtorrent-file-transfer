@@ -54,9 +54,9 @@
             <div class="display">
                 <div class="torrent" v-for="addedTorrent in addedTorrents">
                     <p>{{addedTorrent.name}}<span v-if="addedTorrent.length">{{addedTorrent.length.toFilesize()}}</span></p>
-                    <div class="w3-light-grey" style="display: inline-block;width: fit-content;padding: 5px;border-radius: 2px;">
+                    <div class="w3-light-grey" style="display: inline-block;width: fit-content;padding: 0px;border-radius: 2px;">
                         <div class="w3-container w3-green w3-center"
-                            :style="'width:' + (addedTorrent.progress * 100) + '%;padding:0'">
+                            :style="'width:' + (addedTorrent.progress * 100) + '%;padding:10px'">
                             {{(addedTorrent.progress * 100).toFixed(2)}}%
                             ({{(addedTorrent.timeRemaining /  1000).toFixed(0)}}s ETA)
                         </div>
@@ -68,9 +68,9 @@
                 </div>
                 <div class="torrent" v-for="finishedTorrent in finishedTorrents">
                     <p>{{finishedTorrent.name}}<span v-if="finishedTorrent.length">{{finishedTorrent.length.toFilesize()}}</span></p>
-                    <div class="w3-light-grey" style="display: inline-block;width: fit-content;padding: 5px;border-radius: 2px;">
+                    <div class="w3-light-grey" style="display: inline-block;width: fit-content;padding: 0px;border-radius: 2px;">
                         <div class="w3-container w3-green w3-center"
-                            :style="'width:' + (finishedTorrent.progress * 100) + '%;padding:0'">
+                            :style="'width:' + (finishedTorrent.progress * 100) + '%;padding:10px'">
                             {{(finishedTorrent.progress * 100).toFixed(2)}}%
                             ({{(finishedTorrent.timeRemaining /  1000).toFixed(0)}}s ETA)
                         </div>
