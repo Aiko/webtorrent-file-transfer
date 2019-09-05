@@ -27,6 +27,49 @@ body {
     box-shadow: none !important;
     background: #4b74ff !important;
   }
+
+  .ad{
+  background: #466ef41a !important;
+  width: 100%;
+  border: 1px #fff solid !important;
+  padding: 5px;
+  max-width: 700px;
+  border-radius: 0px !important;
+  border-left: none !important;
+  border-right: none !important;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-decoration: none;
+  color: #fff !important;
+  font-weight: 500;
+  top: 0;
+  margin-top: 0px !important;
+  text-align: left;
+}
+.ad span{
+  background: #fff !important;
+  position: absolute;
+  right: 0;
+  color: #4b74ff !important;
+  line-height: 20px;
+  margin-top: -25px !important;
+  border-radius: 0px !important;
+  margin-right: 5px;
+  padding: 14px !important;
+  transition: .2s;
+}
+.ad span:hover{
+  background: #355ad8;
+  transition: .2s;
+}
+.ad span i{
+  font-size: 20px;
+  margin-left: 3px;
+}
+
+
 }
 .no-desktop{
   display: none;
